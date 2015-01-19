@@ -3,29 +3,35 @@
 #Homework 2, Solution 4
 
 def main():
-    #Generates the Syracuse sequence for number n
-    Syr = [0]
+    #generates the Syracuse sequence for number n
     n = .1
 
     try:
-        while n < 1 or int(n) != n:
-            n = eval(input("For which number would you like to generate the Syracuse sequence? "))
-            if int(n) != n or n < 0:
-                print("Please enter a positive integer.")
+        #accept only a positive integer as input
+        n = input("\nFor which number would you like to generate the Syracuse sequence? (<Enter> to quit): ")
+        while n != "":
+            n = eval(n)
+            while n < 1 or int(n) != n:
+                print("\nPlease enter a positive integer.")
+                n = eval(input("\nFor which number would you like to generate the Syracuse sequence? "))
 
-        print("Syracuse sequence: " + str(n), end="")
-        
-        while n != 1:
-            if n % 2 == 0:
-                n = n / 2
-                print(",", str(int(n)), end="")
-            else:
-                n = n * 3 + 1
-                print(",", str(int(n)), end="")
+            print("\nSyracuse sequence: " + str(n), end="")
+            
+            #print the complete Syracuse sequence until the nth element equals 1
+            while n != 1:
+                if n % 2 == 0:
+                    n = n / 2
+                    print(",", str(int(n)), end="")
+                else:
+                    n = n * 3 + 1
+                    print(",", str(int(n)), end="")
 
+            n = input("\n\nFor which number would you like to generate the Syracuse sequence? (<Enter> to quit): ")
+
+    #handle exceptions when user does not enter valid, numeric data
     except NameError:
-        print("Please enter a number.")
+        print("\nThere was an error. Please enter a number.")
     except:
-        print("There was an unexpected error. Please try again.")
+        print("\nThere was an unexpected error. Please try again.")
 
 main()

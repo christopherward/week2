@@ -5,7 +5,7 @@
 def main():
     #ask user for location of mileage data
     try:
-        filename = input("Where are the travel data located? ")
+        filename = input("\nIn which file are the travel data located? ")
         infile = open(filename,'r')
  
         #initialize variables to hold MPG data
@@ -24,7 +24,7 @@ def main():
             if legs == 0:
                 miles.append(eval(line))
                 
-            #for all subsequent lines, read both odometer and gas estimate
+            #for all subsequent lines, read both odometer and gas usage
             elif legs > 0:
                 miles.append(eval(line.split(" ")[0]))
                 gas.append(eval(line.split(" ")[1]))
@@ -34,9 +34,11 @@ def main():
         #print MPG for each leg, followed by overall MPG for total journey
         for i in range(1,legs):
             print("\nThe MPG for leg", i ,"is: ", (miles[i] - miles[i-1]) / (gas[i]))
-        print("\nThe MPG for all legs is: ", (miles[legs-1] - miles[0]) / sum(gas))
+        print("\nThe MPG for the complete trip is: ", (miles[legs-1] - miles[0]) / sum(gas))
+
+    #handle unusual exceptions with the source data
     except NameError:
-        print("\nPlease use a file with numeric data only. Restart the program and try again.")
+        print("\nPlease use a file with numeric data only. Modify the source file and restart the program to try again.")
     except:
         print("\nThere was an unexpected error. Please restart the program and try again.")
 main()
